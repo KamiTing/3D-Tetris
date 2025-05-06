@@ -1,0 +1,91 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build (debug)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "${workspaceFolder}/include",
+                "-L", "${workspaceFolder}/lib",
+                "${workspaceFolder}/src/main.cpp",
+                "${workspaceFolder}/src/KeyBoardManager.cpp",
+                "${workspaceFolder}/src/BlockDealer.cpp",
+                "${workspaceFolder}/src/BlockField.cpp",
+                "${workspaceFolder}/src/Render.cpp",
+                "${workspaceFolder}/src/GameProgress.cpp",
+                "${workspaceFolder}/src/TextureLoader.cpp",
+                "-o", "${workspaceFolder}/build/3DTetris_debug.exe",
+                "-lfreeglut",
+                "-lopengl32",
+                "-lglu32",
+                "-g",
+                "-Wall"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Debug 模式編譯 OpenGL 程式"
+        },
+        {
+            "label": "build (release)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "${workspaceFolder}/include",
+                "-L", "${workspaceFolder}/lib",
+                "${workspaceFolder}/src/main.cpp",
+                "${workspaceFolder}/src/KeyBoardManager.cpp",
+                "${workspaceFolder}/src/BlockDealer.cpp",
+                "${workspaceFolder}/src/BlockField.cpp",
+                "${workspaceFolder}/src/Render.cpp",
+                "${workspaceFolder}/src/GameProgress.cpp",
+                "${workspaceFolder}/src/TextureLoader.cpp",
+                "-o", "${workspaceFolder}/build/3DTetris_release.exe",
+                "-lfreeglut",
+                "-lopengl32",
+                "-lglu32",
+                "-Ofast",
+                "-mwindows"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Release 模式編譯 OpenGL 程式"
+        },
+        {
+            "label": "copy DLL to build folder",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "copy",
+                "${workspaceFolder}/lib/libfreeglut.dll",
+                "${workspaceFolder}/build/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "build and run (debug)",
+            "dependsOn": [
+                "build (debug)",
+                "copy DLL to build folder"
+            ],
+            "type": "shell",
+            "command": "${workspaceFolder}/build/3DTetris_debug.exe"
+        },
+        {
+            "label": "build and run (release)",
+            "dependsOn": [
+                "build (release)",
+                "copy DLL to build folder"
+            ],
+            "type": "shell",
+            "command": "${workspaceFolder}/build/3DTetris_release.exe"
+        }
+    ]
+}
