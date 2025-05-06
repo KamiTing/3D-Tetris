@@ -171,22 +171,21 @@ void GameProgress::idle() {
 }
 
 void clearScreen() {
-    // 切换到正确的投影矩阵
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0, 800, 0, 600); // 设置 2D 正交投影
+    gluOrtho2D(0, 800, 0, 600); 
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    // 清除颜色缓冲区
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(45.0, 1200.0 / 800.0, 1.0, 100.0);
     glMatrixMode(GL_MODELVIEW);
-    glutSwapBuffers(); // 切换缓冲区
+    glutSwapBuffers(); 
 }
 
 // 處理按鍵
